@@ -1,4 +1,4 @@
-# Solution overview
+# [WORK IN PROGRESS - NOT WORKING FOR NOW] Solution overview
 ## Design overview
 Solution is based on microservices architecture in .net 9 and run inside docker containers.
 For API Gateway and Load Balancing Ocelot was choosen with help of Consul for service discovery.
