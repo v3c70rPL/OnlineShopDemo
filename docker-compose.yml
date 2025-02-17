@@ -1,0 +1,77 @@
+version: '3.4'
+
+services:
+  api-gateway:
+    image: apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - consul
+      - products-service
+      - customers-service
+      - orders-service
+
+  products-service:
+    image: products-service
+    build:
+      context: .
+      dockerfile: ProductsService/Dockerfile
+    ports:
+      - "5001:5000"
+    depends_on:
+      - mongo
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+      - MONGO_URL=mongodb://mongo:27017
+
+  customers-service:
+    image: customers-service
+    build:
+      context: .
+      dockerfile: CustomersService/Dockerfile
+    ports:
+      - "5002:5000"
+    depends_on:
+      - sqlserver
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+
+  orders-service:
+    image: orders-service
+    build:
+      context: .
+      dockerfile: OrdersService/Dockerfile
+    ports:
+      - "5003:5000"
+    depends_on:
+      - sqlserver
+    environment:
+      - ASPNETCORE_URLS=http://+:5000
+
+  consul:
+    image: hashicorp/consul:latest
+    ports:
+      - "8500:8500"
+    command: "consul agent -dev -client=0.0.0.0"
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourTopSecretPassword2025#
+    ports:
+      - "1433:1433"
+
+   rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"

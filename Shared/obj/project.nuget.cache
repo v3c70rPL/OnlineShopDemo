@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "RTC88nW47Cc=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\cc\\Projects\\OnlineShopDemo_v2\\Shared\\Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\cc\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.101\\microsoft.net.sdk.compilers.toolset.9.0.101.nupkg.sha512"
+  ],
+  "logs": []
+}
